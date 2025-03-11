@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Slider</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .slider-container {
+      position: relative;
+      width: 80%;
+      max-width: 600px;
+      overflow: hidden;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .slider-images {
+      display: flex;
+      transition: transform 0.5s ease;
+    }
+
+    .slider-images img {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+    }
+
+    .prev, .next {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(0, 0, 0, 0.5);
+      color: white;
+      font-size: 30px;
+      padding: 10px;
+      border: none;
+      cursor: pointer;
+      border-radius: 50%;
+      transition: background-color 0.3s;
+    }
+
+    .prev:hover, .next:hover {
+      background-color: rgba(0, 0, 0, 0.7);
+    }
+
+    .prev {
+      left: 10px;
+    }
+
+    .next {
+      right: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="slider-container">
+    <div class="slider-images" id="sliderImages">
+      <img src="icons&images/cherry blossom.jpg" alt="Image 1">
+      <img src="icons&images/jasmine.jpg" alt="Image 2">
+      <img src="icons&images/lotus.jpg" alt="Image 3">
+      <img src="icons&images/rose.jpg" alt="Image 4">
+    </div>
+    <button class="prev" id="prevButton">&#10094;</button>
+    <button class="next" id="nextButton">&#10095;</button>
+  </div>
+
+  <script>
+    // Image URLs array
+    const images = [
+      'icons&images/cherry blossom.jpg',
+      'icons&images/jasmine.jpg',
+      'icons&images/lotus.jpg',
+      'icons&images/rose.jpg'
+    ];
+
+    // Get DOM elements
+    const sliderImages = document.getElementById('sliderImages');
+    const prevButton = document.getElementById('prevButton');
+    const nextButton = document.getElementById('nextButton');
+
+    let currentIndex = 0;
+
+    // Function to update the slider position
+    function updateSliderPosition() {
+      sliderImages.style.transform = `translateX(-${currentIndex * 100}%)`;
+    }
+
+    // Event listener for "Next" button
+    nextButton.addEventListener('click', () => {
+      if (currentIndex < images.length - 1) {
+        currentIndex++;
+      } else {
+        currentIndex = 0; // Loop back to the first image
+      }
+      updateSliderPosition();
+    });
+
+    // Event listener for "Previous" button
+    prevButton.addEventListener('click', () => {
+      if (currentIndex > 0) {
+        currentIndex--;
+      } else {
+        currentIndex = images.length - 1; // Loop back to the last image
+      }
+      updateSliderPosition();
+    });
+  </script>
+
+</body>
+</html>
